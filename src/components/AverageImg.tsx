@@ -53,7 +53,7 @@ const AverageImg = ({ url, setPrimaryColor }: Prop) => {
       <img
         alt="Image"
         ref={imageRef}
-        className="image w-30 h-30 object-contain rounded-2"
+        className="image absolute w-30 h-30 object-contain rounded-2"
         src={url}
       />
       <canvas ref={canvasRef} style={{ display: "none" }} />
