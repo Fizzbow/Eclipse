@@ -11,7 +11,7 @@ const AlbumCard = () => {
   return (
     <>
       <div
-        className="AlbumCard relative overflow-hidden z-1  w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3
+        className="AlbumCard m-6 relative overflow-hidden z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3
         "
         style={{
           boxShadow:
@@ -23,12 +23,7 @@ const AlbumCard = () => {
           url="https://upload.wikimedia.org/wikipedia/en/6/63/Aespa_-_My_World.png"
         />
 
-        <figure
-          className="h-full w-full bg-[rgb(255,255,255,0.3)] relative block z-[-1] overflow-hidden rounded-[50%]"
-          style={{
-            filter: "blur(60px)",
-          }}
-        />
+        <figure className="h-full w-full bg-[rgb(255,255,255,0.3)] filter-blur-[60px] relative block z-[-1] overflow-hidden rounded-[50%] transition-transform" />
       </div>
     </>
   );
