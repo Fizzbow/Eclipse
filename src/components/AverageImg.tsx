@@ -23,7 +23,7 @@ const AverageImg = ({ url, setPrimaryColor }: Prop) => {
 
       const imgData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
       const pixels = imgData?.data;
-      console.log({ pixels });
+      // console.log({ pixels });
 
       let totalR = 0,
         totalG = 0,
@@ -53,7 +53,7 @@ const AverageImg = ({ url, setPrimaryColor }: Prop) => {
       <img
         alt="Image"
         ref={imageRef}
-        className="image absolute w-30 h-30 object-contain rounded-2"
+        className="image absolute z-1 w-30 h-30 object-contain rounded-2"
         src={url}
       />
       <canvas ref={canvasRef} style={{ display: "none" }} />
