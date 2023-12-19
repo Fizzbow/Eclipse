@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import AverageImg from "./AverageImg";
+import styled from "styled-components";
+import "./Album.scss";
+
+const Figure = styled.figure`
+  color: red;
+  animation: leftToRight 4s infinite alternate;
+`;
 
 const AlbumCard = () => {
   const [primary, setPrimary] = useState<string>();
 
   useEffect(() => {
     const figure = document.querySelector("figure") as HTMLElement;
-    figure.style.background = `linear-gradient(to right ,${primary} 30%,rgb(255,255,255))`;
+    figure.style.background = `linear-gradient(45deg ,${primary} 30%,rgb(255,255,255))`;
   }, [primary]);
   return (
     <>
@@ -23,7 +30,7 @@ const AlbumCard = () => {
           url="https://upload.wikimedia.org/wikipedia/en/6/63/Aespa_-_My_World.png"
         />
 
-        <figure className="h-full w-full bg-[rgb(255,255,255,0.3)] filter-blur-[60px] relative block z-[-1] overflow-hidden rounded-[50%] transition-transform" />
+        <Figure className="h-full w-full bg-[rgb(255,255,255,0.3)] filter-blur-[60px] relative block z-[-1] overflow-hidden rounded-[50%] transition-transform" />
       </div>
     </>
   );
