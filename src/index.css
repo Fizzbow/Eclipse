@@ -23,11 +23,29 @@ a:hover {
 body {
   height: 100vh;
   margin: 0px;
-  background-color: #fff;
+  /* background: rgb(41, 41, 101);
+  background: linear-gradient(
+    175deg,
+    rgba(41, 41, 101, 1) 0%,
+    rgba(93, 63, 124, 1) 37%,
+    rgba(189, 79, 154, 1) 100%
+  ); */
 }
 
 #root {
   text-align: center;
   height: 100%;
   overflow: hidden;
+}
+.tridimensional-gradient-text {
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 100%, 1) 0%,
+    hsla(220, 1%, 49%, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 2px #1a191a;
 }

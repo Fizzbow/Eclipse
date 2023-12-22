@@ -3,8 +3,7 @@ import AverageImg from "./AverageImg";
 import styled from "styled-components";
 import "./Album.scss";
 
-const Figure = styled.figure`
-  color: red;
+const Bg = styled.figure`
   animation: leftToRight 4s infinite alternate;
 `;
 
@@ -30,7 +29,28 @@ const AlbumCard = () => {
           url="https://upload.wikimedia.org/wikipedia/en/6/63/Aespa_-_My_World.png"
         />
 
-        <Figure className="h-full w-full bg-[rgb(255,255,255,0.3)] filter-blur-[60px] relative block z-[-1] overflow-hidden rounded-[50%] transition-transform" />
+        <Bg className="h-[140%] w-[140%] filter-blur-[60px] absolute  z-[-1]  rounded-[50%] transition-transform"></Bg>
+        <div className="ml-4 my-4 h-26 justify-between flex-1" flex="~ col">
+          <div
+            style={{ color: `${primary}`, opacity: 0.45 }}
+            className="font-900 tracking-widest text-[18px] text-shadow-sm"
+            flex="~ row"
+          >
+            SPICY
+          </div>
+          <div
+            flex="~ row"
+            className="text-white text-[18px] text-shadow-md w-full "
+          >
+            aespa
+          </div>
+          <div
+            className="text-white text-[12px] tridimensional-gradient-text"
+            flex="~ row row-reverse"
+          >
+            MYWORLD - The 3rd Mini Album
+          </div>
+        </div>
       </div>
     </>
   );
