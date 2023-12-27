@@ -11,6 +11,11 @@ interface Prop {
 const Dialog = ({ animation, setOpen, open }: Prop) => {
   useEffect(() => {
     const dialog = document.querySelector(".dialog") as HTMLElement;
+
+    // if (dialog.classList.contains("in") || dialog.classList.contains("out")) {
+    //   dialog.classList.remove("in");
+    //   dialog.classList.remove("out");
+    // }
     if (open) {
       dialog?.classList.add("in");
     } else {
@@ -19,16 +24,26 @@ const Dialog = ({ animation, setOpen, open }: Prop) => {
   }, [open]);
   return (
     <div
-      className="dialog absolute z-[9999] full scale-0"
+      className="dialog absolute transition-all z-[9999] full scale-0"
       flex="~ col items-center  justify-center"
     >
       <div
-        className="right-0 top-0 text-red absolute font-bold"
+        className="right-0 top-0 font-700 text-[40px] text-red absolute font-bold cursor-pointer"
         onClick={() => setOpen(!open)}
       >
         x
       </div>
-      <div className="dialog-content fixed op-0">dialog content</div>
+      <div
+        className="dialog-content transition-opacity fixed op-0 font-bold text-white text-[20px]"
+        flex="~ col items-center"
+      >
+        <span>흐릿하게 드리운</span>
+        <span>안갯속 All alone</span>
+        <span>널 가로막은 경계선</span>
+        <span>하나 둘 걷히면</span>
+        <span>끝없이 또 Walk away</span>
+        <span>널 가둔 그 미로</span>
+      </div>
     </div>
   );
 };

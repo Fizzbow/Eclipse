@@ -18,16 +18,15 @@ const AlbumCard = () => {
   }, [primary]);
 
   useEffect(() => {
-    if (!open) return;
     const mask = document.querySelector(".mask") as HTMLElement;
+    if (!open) {
+      if (mask.classList.contains("over")) {
+        mask.classList.remove("over");
+      }
+      return;
+    }
     // const foots = document.querySelectorAll(".fonte") as HTMLElement[];
     mask.classList.add("over");
-    // foots.forEach((el) => {
-    //   // console.log({ el });
-    //   el.style.position = "absolute";
-    //   el.style.transform = "scale(1.6)";
-    // });
-    // album.style.opacity = 0;
   }, [open]);
   return (
     <>

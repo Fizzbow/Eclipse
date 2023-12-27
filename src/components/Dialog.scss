@@ -16,12 +16,14 @@
     @include animationEffect(blowUpBlur, 1s);
     .dialog-content {
       opacity: 1;
-      @include animationEffect(blowUpContent, 0.5s);
+      transform: perspective(400px) rotateX(45deg);
+      @include animationEffect(blowUpContent, 0.25s);
     }
   }
 
-  // $.out {
-  // }
+  &.out {
+    transform: scale(0);
+  }
 }
 
 @keyframes blowUpBlur {
