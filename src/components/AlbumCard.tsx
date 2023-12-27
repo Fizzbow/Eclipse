@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AverageImg from "./AverageImg";
+import Dialog from "./Dialog";
 import styled from "styled-components";
 import "./Album.scss";
 
@@ -9,15 +10,32 @@ const Bg = styled.figure`
 
 const AlbumCard = () => {
   const [primary, setPrimary] = useState<string>();
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const figure = document.querySelector("figure") as HTMLElement;
     figure.style.background = `linear-gradient(45deg ,${primary} 30%,rgb(255,255,255))`;
   }, [primary]);
+
+  useEffect(() => {
+    if (!open) return;
+    const mask = document.querySelector(".mask") as HTMLElement;
+    // const foots = document.querySelectorAll(".fonte") as HTMLElement[];
+    mask.classList.add("over");
+    // foots.forEach((el) => {
+    //   // console.log({ el });
+    //   el.style.position = "absolute";
+    //   el.style.transform = "scale(1.6)";
+    // });
+    // album.style.opacity = 0;
+  }, [open]);
   return (
     <>
       <div
-        className="AlbumCard m-6 relative overflow-hidden z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3
+        onClick={() => {
+          setOpen(!open);
+        }}
+        className="AlbumCard m-6 relative  transition-opacity z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3
         "
         style={{
           boxShadow:
@@ -30,28 +48,32 @@ const AlbumCard = () => {
         />
 
         <Bg className="h-[140%] w-[140%] filter-blur-[60px] absolute  z-[-1]  rounded-[50%] transition-transform"></Bg>
-        <div className="ml-4 my-4 h-26 justify-between flex-1" flex="~ col">
+        <div
+          className="mask ml-4 my-4 h-26 justify-between  flex-1 transition-transform "
+          flex="~ col"
+        >
           <div
             style={{ color: `${primary}`, opacity: 0.45 }}
-            className="font-900 tracking-widest text-[18px] text-shadow-sm"
+            className=" font-900 tracking-widest text-[18px] text-shadow-sm"
             flex="~ row"
           >
             SPICY
           </div>
           <div
             flex="~ row"
-            className="text-white text-[18px] text-shadow-md w-full "
+            className=" text-white text-[18px] text-shadow-md w-full "
           >
             aespa
           </div>
           <div
-            className="text-white text-[12px] tridimensional-gradient-text"
+            className=" text-white text-[12px] tridimensional-gradient-text"
             flex="~ row row-reverse"
           >
             MYWORLD - The 3rd Mini Album
           </div>
         </div>
       </div>
+      <Dialog open={open} setOpen={(open) => setOpen(open)} />
     </>
   );
 };
