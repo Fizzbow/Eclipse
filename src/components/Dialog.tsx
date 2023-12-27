@@ -18,14 +18,17 @@ const Dialog = ({ animation, setOpen, open }: Prop) => {
     }
   }, [open]);
   return (
-    <div className="dialog " flex="~ col items-center justify-center">
+    <div
+      className="dialog absolute z-[9999] full scale-0"
+      flex="~ col items-center  justify-center"
+    >
       <div
         className="right-0 top-0 text-red absolute font-bold"
         onClick={() => setOpen(!open)}
       >
         x
       </div>
-      <div className="dialog-content">dialog content</div>
+      <div className="dialog-content fixed op-0">dialog content</div>
     </div>
   );
 };
