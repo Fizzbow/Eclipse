@@ -53,26 +53,26 @@ const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
           url={albumImg}
         />
 
-        <Bg className="w-[120%] h-[120%] filter-blur-[60px] absolute left-[30%]  z-[-1]  rounded-[50%] transition-transform"></Bg>
+        <Bg className="w-[120%] h-[120%] transition-width transition-hight filter-blur-[60px] absolute left-[30%]  z-[-1]  rounded-[50%] transition-transform"></Bg>
         <div
           className="mask ml-4 my-4 h-26 justify-between  flex-1 transition-transform "
           flex="~ col"
         >
           <div
             style={{ color: `${primary}`, opacity: 0.45 }}
-            className=" font-900 tracking-widest text-[18px] text-shadow-sm"
+            className="fonte font-900 tracking-widest text-[18px] text-shadow-sm"
             flex="~ row"
           >
             {song}
           </div>
           <div
             flex="~ row"
-            className=" text-white text-[18px] text-shadow-md w-full "
+            className="fonte text-white text-[18px] text-shadow-md w-full "
           >
             {singer}
           </div>
           <div
-            className=" text-white text-[12px] tridimensional-gradient-text"
+            className="fonte text-white text-[12px] tridimensional-gradient-text"
             flex="~ row row-reverse"
           >
             {album}

@@ -16,8 +16,15 @@
     @include animationEffect(blowUpBlur, 4s);
     .dialog-content {
       opacity: 1;
-      transform: perspective(400px) rotateX(45deg);
       @include animationEffect(blowUpContent, 0.25s);
+      &_title {
+        color: rgba(68, 121, 136, 0.5);
+        font-weight: 700;
+        font-size: 32px;
+      }
+      &_lyric {
+        transform: perspective(400px) rotateX(45deg);
+      }
     }
   }
 
@@ -28,12 +35,12 @@
 
 @keyframes blowUpBlur {
   70% {
-    @include backdropFilter(30px);
+    @include backdropFilter(20px);
     @include bgColorOp(0.2);
   }
   100% {
     @include bgColorOp(0.3);
-    @include backdropFilter(40px);
+    @include backdropFilter(22px);
   }
 }
 

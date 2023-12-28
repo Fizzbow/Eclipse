@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import "./Dialog.scss";
 
-type Animation = "blowup";
 interface Prop {
   open: boolean;
   setOpen: (open: boolean) => void;
-  animation?: Animation;
 }
 
-const Dialog = ({ animation, setOpen, open }: Prop) => {
+const Dialog = ({ setOpen, open }: Prop) => {
   useEffect(() => {
     const dialog = document.querySelector(".dialog") as HTMLElement;
 
@@ -37,12 +35,15 @@ const Dialog = ({ animation, setOpen, open }: Prop) => {
         className="dialog-content transition-opacity fixed op-0 font-bold text-white text-[20px]"
         flex="~ col items-center"
       >
-        <span>흐릿하게 드리운</span>
-        <span>안갯속 All alone</span>
-        <span>널 가로막은 경계선</span>
-        <span>하나 둘 걷히면</span>
-        <span>끝없이 또 Walk away</span>
-        <span>널 가둔 그 미로</span>
+        {/* <span className="dialog-content_title">SPAN</span> */}
+        <div className="dialog-content_lyric" flex="~ col">
+          <span>흐릿하게 드리운</span>
+          <span>안갯속 All alone</span>
+          <span>널 가로막은 경계선</span>
+          <span>하나 둘 걷히면</span>
+          <span>끝없이 또 Walk away</span>
+          <span>널 가둔 그 미로</span>
+        </div>
       </div>
     </div>
   );

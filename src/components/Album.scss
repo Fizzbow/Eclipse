@@ -7,9 +7,15 @@ $timing: 1.5s;
   &.over {
     overflow: visible;
     box-shadow: none !important;
-    // transform: scale(2.5);
 
     .image {
+      opacity: 0;
+    }
+    figure {
+      width: 200%;
+      height: 200%;
+    }
+    .fonte {
       opacity: 0;
     }
   }
