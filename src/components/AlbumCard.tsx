@@ -8,7 +8,14 @@ const Bg = styled.figure`
   animation: leftToRight 4s infinite alternate;
 `;
 
-const AlbumCard = () => {
+interface Album {
+  singer: string;
+  album: string;
+  albumImg: string;
+  song: string;
+}
+
+const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
   const [primary, setPrimary] = useState<string>();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -43,7 +50,7 @@ const AlbumCard = () => {
       >
         <AverageImg
           setPrimaryColor={(primary) => setPrimary(primary)}
-          url="https://upload.wikimedia.org/wikipedia/en/6/63/Aespa_-_My_World.png"
+          url={albumImg}
         />
 
         <Bg className="h-[140%] w-[140%] filter-blur-[60px] absolute  z-[-1]  rounded-[50%] transition-transform"></Bg>
@@ -56,19 +63,19 @@ const AlbumCard = () => {
             className=" font-900 tracking-widest text-[18px] text-shadow-sm"
             flex="~ row"
           >
-            SPICY
+            {song}
           </div>
           <div
             flex="~ row"
             className=" text-white text-[18px] text-shadow-md w-full "
           >
-            aespa
+            {singer}
           </div>
           <div
             className=" text-white text-[12px] tridimensional-gradient-text"
             flex="~ row row-reverse"
           >
-            MYWORLD - The 3rd Mini Album
+            {album}
           </div>
         </div>
       </div>
@@ -77,4 +84,4 @@ const AlbumCard = () => {
   );
 };
 
-export default AlbumCard;
+export { AlbumCard, Album };
