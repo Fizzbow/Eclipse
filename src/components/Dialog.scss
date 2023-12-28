@@ -13,7 +13,7 @@
   &.in {
     transform: scale(1);
     @include bgColorOp(0);
-    @include animationEffect(blowUpBlur, 1s);
+    @include animationEffect(blowUpBlur, 4s);
     .dialog-content {
       opacity: 1;
       transform: perspective(400px) rotateX(45deg);
@@ -27,10 +27,7 @@
 }
 
 @keyframes blowUpBlur {
-  25% {
-    @include bgColorOp(0.1);
-  }
-  50% {
+  70% {
     @include backdropFilter(30px);
     @include bgColorOp(0.2);
   }

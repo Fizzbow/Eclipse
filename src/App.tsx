@@ -1,4 +1,4 @@
-import { AlbumCard, Album } from "./components/AlbumCard";
+import { AlbumCard, type Album } from "./components/AlbumCard";
 
 const songs: Album[] = [
   {
@@ -14,16 +14,7 @@ function App() {
   return (
     <>
       {songs.map((s) => {
-        const { song, singer, albumImg, album } = s;
-        return (
-          <AlbumCard
-            key={song}
-            song={song}
-            album={album}
-            singer={singer}
-            albumImg={albumImg}
-          />
-        );
+        return <AlbumCard key={s.song} {...s} />;
       })}
     </>
   );

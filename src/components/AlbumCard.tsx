@@ -5,7 +5,7 @@ import styled from "styled-components";
 import "./Album.scss";
 
 const Bg = styled.figure`
-  animation: leftToRight 4s infinite alternate;
+  animation: linearZoom 1.5s infinite alternate;
 `;
 
 interface Album {
@@ -25,15 +25,15 @@ const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
   }, [primary]);
 
   useEffect(() => {
-    const mask = document.querySelector(".mask") as HTMLElement;
+    const AlbumCard = document.querySelector(".AlbumCard") as HTMLElement;
     if (!open) {
-      if (mask.classList.contains("over")) {
-        mask.classList.remove("over");
+      if (AlbumCard.classList.contains("over")) {
+        AlbumCard.classList.remove("over");
       }
       return;
     }
     // const foots = document.querySelectorAll(".fonte") as HTMLElement[];
-    mask.classList.add("over");
+    AlbumCard.classList.add("over");
   }, [open]);
   return (
     <>
@@ -41,7 +41,7 @@ const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
         onClick={() => {
           setOpen(!open);
         }}
-        className="AlbumCard m-6 relative  transition-opacity z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3
+        className="AlbumCard m-6 relative transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3
         "
         style={{
           boxShadow:
@@ -53,7 +53,7 @@ const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
           url={albumImg}
         />
 
-        <Bg className="h-[140%] w-[140%] filter-blur-[60px] absolute  z-[-1]  rounded-[50%] transition-transform"></Bg>
+        <Bg className="w-[120%] h-[120%] filter-blur-[60px] absolute left-[30%]  z-[-1]  rounded-[50%] transition-transform"></Bg>
         <div
           className="mask ml-4 my-4 h-26 justify-between  flex-1 transition-transform "
           flex="~ col"
@@ -84,4 +84,5 @@ const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
   );
 };
 
-export { AlbumCard, Album };
+export { AlbumCard };
+export type { Album };
