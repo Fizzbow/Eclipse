@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./Dialog.scss";
+import Lyric from "../pages/Lyric.tsx";
 
 interface Prop {
   open: boolean;
@@ -32,18 +33,11 @@ const Dialog = ({ setOpen, open }: Prop) => {
         x
       </div>
       <div
-        className="dialog-content transition-opacity fixed op-0 font-bold text-white text-[20px]"
+        className="dialog-content transition-opacity fixed op-0 "
         flex="~ col items-center"
       >
+        <Lyric />
         {/* <span className="dialog-content_title">SPAN</span> */}
-        <div className="dialog-content_lyric" flex="~ col">
-          <span>흐릿하게 드리운</span>
-          <span>안갯속 All alone</span>
-          <span>널 가로막은 경계선</span>
-          <span>하나 둘 걷히면</span>
-          <span>끝없이 또 Walk away</span>
-          <span>널 가둔 그 미로</span>
-        </div>
       </div>
     </div>
   );

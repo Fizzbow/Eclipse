@@ -17,14 +17,14 @@
     .dialog-content {
       opacity: 1;
       @include animationEffect(blowUpContent, 0.25s);
-      &_title {
-        color: rgba(68, 121, 136, 0.5);
-        font-weight: 700;
-        font-size: 32px;
-      }
-      &_lyric {
-        transform: perspective(400px) rotateX(45deg);
-      }
+      // &_title {
+      //   color: rgba(68, 121, 136, 0.5);
+      //   font-weight: 700;
+      //   font-size: 32px;
+      // }
+      // &_lyric {
+      //   transform: perspective(400px) rotateX(45deg);
+      // }
     }
   }
 
