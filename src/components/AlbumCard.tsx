@@ -13,9 +13,11 @@ interface Album {
   album: string;
   albumImg: string;
   song: string;
+  mode: "display" | "showLyric";
+  idx: number;
 }
 
-const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
+const AlbumCard = ({ singer, idx, album, song, albumImg, mode }: Album) => {
   const [primary, setPrimary] = useState<string>();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -25,6 +27,7 @@ const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
   }, [primary]);
 
   useEffect(() => {
+    if (mode === "display") return;
     const AlbumCard = document.querySelector(".AlbumCard") as HTMLElement;
     if (!open) {
       if (AlbumCard.classList.contains("over")) {
@@ -35,17 +38,20 @@ const AlbumCard = ({ singer, album, song, albumImg }: Album) => {
     // const foots = document.querySelectorAll(".fonte") as HTMLElement[];
     AlbumCard.classList.add("over");
   }, [open]);
+  function handleAlbum() {
+    setOpen(!open);
+  }
+
   return (
     <>
       <div
-        onClick={() => {
-          setOpen(!open);
-        }}
-        className="AlbumCard m-6 relative transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3
-        "
+        onClick={() => handleAlbum()}
+        className={` AlbumCard m-6  absolute transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3`}
         style={{
           boxShadow:
             "rgba(24, 32, 79, 0.25) 0px 40px 80px, rgba(255, 255, 255, 0.5) 0px 0px 0px 0.5px inset",
+          transform: `rotate(${idx * 12}deg)`,
+          transformOrigin: "left bottom",
         }}
       >
         <AverageImg
