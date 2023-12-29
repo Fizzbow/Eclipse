@@ -40,7 +40,8 @@ const Home = () => {
     <>
       <div className="relative">
         {songs.map((s, idx) => {
-          return <AlbumCard idx={idx} key={s.song} {...s} />;
+          const album = { ...s, idx };
+          return <AlbumCard key={s.song} {...album} />;
         })}
       </div>
     </>
