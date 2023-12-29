@@ -14,10 +14,10 @@ interface Album {
   albumImg: string;
   song: string;
   mode: "display" | "showLyric";
-  idx: number;
+  angle?: number;
 }
 
-const AlbumCard = ({ singer, idx, album, song, albumImg, mode }: Album) => {
+const AlbumCard = ({ singer, angle, album, song, albumImg, mode }: Album) => {
   const [primary, setPrimary] = useState<string>();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -46,11 +46,11 @@ const AlbumCard = ({ singer, idx, album, song, albumImg, mode }: Album) => {
     <>
       <div
         onClick={() => handleAlbum()}
-        className={` AlbumCard m-6  absolute transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3`}
+        className={`AlbumCard m-6  absolute transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3`}
         style={{
           boxShadow:
             "rgba(24, 32, 79, 0.25) 0px 40px 80px, rgba(255, 255, 255, 0.5) 0px 0px 0px 0.5px inset",
-          transform: `rotate(${idx * 12}deg)`,
+          transform: `rotate(${angle}deg)`,
           transformOrigin: "left bottom",
         }}
       >
