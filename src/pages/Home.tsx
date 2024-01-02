@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { AlbumCard, type Album } from "../components/AlbumCard";
+import { redirectToAuthCodeFlow } from "../api/spotify/redirectToAuthCodeFlow";
+import { getAccessToken } from "../api/spotify/getAccessToken";
 
 const songs: Album[] = [
   {
@@ -9,25 +12,19 @@ const songs: Album[] = [
     album: "MYWORLD - The 3rd Mini Album",
     mode: "display",
   },
-  {
-    song: "Thirsty",
-    singer: "aespa",
-    albumImg:
-      "https://upload.wikimedia.org/wikipedia/en/6/63/Aespa_-_My_World.png",
-    album: "MYWORLD - The 3rd Mini Album",
-    mode: "display",
-  },
-  {
-    song: "sdasdaw",
-    singer: "aespa",
-    albumImg:
-      "https://upload.wikimedia.org/wikipedia/en/6/63/Aespa_-_My_World.png",
-    album: "MYWORLD - The 3rd Mini Album",
-    mode: "display",
-  },
 ];
 
 const Home = () => {
+  useEffect(() => {
+    const clientId = "f5e2e0ea6fca406284d16cf0d98035f8";
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    if (!code) {
+      redirectToAuthCodeFlow(clientId);
+    } else {
+      getAccessToken(clientId, code);
+    }
+  }, []);
   function computedAngle(idx: number): number {
     const len = songs.length;
 
