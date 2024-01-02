@@ -39,6 +39,7 @@ const AlbumCard = ({ singer, angle, album, song, albumImg, mode }: Album) => {
     AlbumCard.classList.add("over");
   }, [open]);
   function handleAlbum() {
+    if (mode === "display") return;
     setOpen(!open);
   }
 

@@ -1,6 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-// import Dialog from '../'
 
 const Content = styled.div`
   transform: perspective(400px) rotateX(45deg);
