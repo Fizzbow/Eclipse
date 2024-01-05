@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AlbumCard, type Album } from "../components/AlbumCard";
 import { redirectToAuthCodeFlow } from "../api/spotify/redirectToAuthCodeFlow";
 import { getAccessToken } from "../api/spotify/getAccessToken";
+import { SPOTIFY_CLIENT_ID } from "../constants/spotify.constants";
+import { getPlayListItemsAlbum } from "../api/spotify/getPlaylist";
+import { generateCodeVerifier } from "../utils/PKCE";
+import { useParams } from "react-router-dom";
 
 const songs: Album[] = [
   {
@@ -15,12 +19,19 @@ const songs: Album[] = [
 ];
 
 const Home = () => {
+  const [playListId, setPlayListId] = useState<string>();
+
+  const verifier = generateCodeVerifier();
+  // const co_ver = localStorage.getItem("code_verifier");
+
   useEffect(() => {
-    const clientId = "f5e2e0ea6fca406284d16cf0d98035f8";
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+
+    const clientId = SPOTIFY_CLIENT_ID;
+
     if (!code) {
-      redirectToAuthCodeFlow(clientId);
+      redirectToAuthCodeFlow(clientId, verifier);
     } else {
       getAccessToken(clientId, code);
     }
@@ -52,14 +63,31 @@ const Home = () => {
     return currAngle;
   }
 
+  async function fetchPlayList() {
+    if (!playListId) return;
+    const res = await getPlayListItemsAlbum(playListId);
+    console.log({ res });
+  }
+
   return (
     <>
-      <div className="relative full flex-center">
-        {songs.map((s, idx) => {
-          const angle = computedAngle(idx);
-          const album = { ...s, angle };
-          return <AlbumCard key={s.song} {...album} />;
-        })}
+      <div className="full flex flex-col">
+        <header>
+          get playlist :
+          <input
+            onChange={(event) => {
+              setPlayListId(event.target.value);
+            }}
+          />
+          <button onClick={() => fetchPlayList()}>确认</button>
+        </header>
+        {/* <div className="relative flex-1 flex flex-center">
+          {songs.map((s, idx) => {
+            const angle = computedAngle(idx);
+            const album = { ...s, angle };
+            return <AlbumCard key={s.song} {...album} />;
+          })}
+        </div> */}
       </div>
     </>
   );

@@ -1,18 +1,29 @@
-import { generateCodeChallenge, generateCodeVerifier } from "../../utils/PKCE";
+import { generateCodeChallenge } from "../../utils/PKCE";
 
-export const redirectToAuthCodeFlow = async (clientId: string) => {
-  const verifier = generateCodeVerifier(128);
+export const redirectToAuthCodeFlow = async (
+  clientId: string,
+  verifier: string
+) => {
   const challenge = await generateCodeChallenge(verifier);
+  console.log({ challenge });
 
-  localStorage.setItem("verifier", verifier);
+  localStorage.setItem("code_verifier", verifier);
 
-  const params = new URLSearchParams();
-  params.append("client_id", clientId);
-  params.append("response_type", "code");
-  params.append("redirect_uri", "http://localhost:6622/callback");
-  params.append("scope", "user-read-private user-read-email");
-  params.append("code_challenge_method", "S256");
-  params.append("code_challenge", challenge);
+  //   const clientId = 'YOUR_CLIENT_ID';
+  // const redirectUri = 'http://localhost:8080';
 
-  document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
+  const scope = "user-read-private user-read-email";
+  const authUrl = new URL("https://accounts.spotify.com/authorize");
+
+  const params = {
+    response_type: "code",
+    client_id: clientId,
+    scope,
+    code_challenge_method: "S256",
+    code_challenge: challenge,
+    redirect_uri: "http://localhost:6622/callback",
+  };
+  authUrl.search = new URLSearchParams(params).toString();
+  window.location.href = authUrl.toString();
+  // document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 };
