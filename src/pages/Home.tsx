@@ -5,7 +5,6 @@ import { getAccessToken } from "../api/spotify/getAccessToken";
 import { SPOTIFY_CLIENT_ID } from "../constants/spotify.constants";
 import { getPlayListItemsAlbum } from "../api/spotify/getPlaylist";
 import { generateCodeVerifier } from "../utils/PKCE";
-import { useParams } from "react-router-dom";
 
 const songs: Album[] = [
   {
