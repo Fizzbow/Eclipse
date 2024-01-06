@@ -11,10 +11,6 @@ const Dialog = ({ setOpen, open }: Prop) => {
   useEffect(() => {
     const dialog = document.querySelector(".dialog") as HTMLElement;
 
-    // if (dialog.classList.contains("in") || dialog.classList.contains("out")) {
-    //   dialog.classList.remove("in");
-    //   dialog.classList.remove("out");
-    // }
     if (open) {
       dialog?.classList.add("in");
     } else {
