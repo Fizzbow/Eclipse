@@ -1,5 +1,3 @@
-import { SPOTIFY_ACCESS_TOKEN } from "../../constants/spotify.constants";
-
 import request from "../index";
 export const getAccessToken = async (clientId: string, code: string) => {
   const verifier = localStorage.getItem("verifier");
