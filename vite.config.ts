@@ -9,10 +9,35 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 6622,
     proxy: {
-      "/accounts": {
+      "^/accounts/*": {
         target: "https://accounts.spotify.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/accounts/, ""),
+        configure: (proxy, _options) => {
+          proxy.on("error", (err, _req, _res) => {
+            console.log("proxy error", err);
+          });
+          proxy.on("proxyReq", (proxyReq, req, _res) => {
+            console.log(
+              "Sending Request:",
+              req.method,
+              req.url,
+              " => TO THE TARGET =>  ",
+              proxyReq.method,
+              proxyReq.protocol,
+              proxyReq.host,
+              proxyReq.path,
+              JSON.stringify(proxyReq.getHeaders())
+            );
+          });
+          proxy.on("proxyRes", (proxyRes, req, _res) => {
+            console.log(
+              "Received Response from the Target:",
+              proxyRes.statusCode,
+              req.url
+            );
+          });
+        },
       },
       "/api": {
         target: "https://api.spotify.com",

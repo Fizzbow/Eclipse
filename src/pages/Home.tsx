@@ -19,22 +19,12 @@ const songs: Album[] = [
 
 const Home = () => {
   const [playListId, setPlayListId] = useState<string>();
+  const [code, setCode] = useState<string | null>();
 
   const verifier = generateCodeVerifier();
   // const co_ver = localStorage.getItem("code_verifier");
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-
-    const clientId = SPOTIFY_CLIENT_ID;
-
-    if (!code) {
-      redirectToAuthCodeFlow(clientId, verifier);
-    } else {
-      getAccessToken(clientId, code);
-    }
-  }, []);
+  useEffect(() => {}, []);
   function computedAngle(idx: number): number {
     const len = songs.length;
 
@@ -62,23 +52,33 @@ const Home = () => {
     return currAngle;
   }
 
-  async function fetchPlayList() {
-    if (!playListId) return;
-    const res = await getPlayListItemsAlbum(playListId);
-    console.log({ res });
+  async function redirec() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const co = urlParams.get("code");
+    if (co) return;
+    console.log({ co });
+
+    redirectToAuthCodeFlow(SPOTIFY_CLIENT_ID, verifier);
+
+    // if (!playListId || !co) return;
+    // const token = await getAccessToken(SPOTIFY_CLIENT_ID, co);
+    // const res = await getPlayListItemsAlbum(playListId);
+    // console.log({ res });
   }
 
   return (
     <>
       <div className="full flex flex-col">
-        <header>
+        <header flex="~ row gap-5">
           get playlist :
           <input
             onChange={(event) => {
               setPlayListId(event.target.value);
             }}
           />
-          <button onClick={() => fetchPlayList()}>确认</button>
+          <button onClick={() => redirec()}>get code</button>
+          <button>get accessToken</button>
+          <button>get playList</button>
         </header>
         {/* <div className="relative flex-1 flex flex-center">
           {songs.map((s, idx) => {

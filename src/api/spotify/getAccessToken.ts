@@ -1,16 +1,26 @@
 import request from "../index";
-export const getAccessToken = async (clientId: string, code: string) => {
-  const verifier = localStorage.getItem("verifier");
+import {
+  SPOTIFY_CODE_VERIFY,
+  SPOTIFY_CLIENT_SECRET,
+} from "../../constants/spotify.constants";
 
-  const params = new URLSearchParams();
-  params.append("client_id", clientId);
-  params.append("grant_type", "authorization_code");
-  params.append("code", code);
-  params.append("redirect_uri", "http://localhost:6622/callback");
-  params.append("code_verifier", verifier!);
+export const getAccessToken = async (client_id: string, code: string) => {
+  const verifier = localStorage.getItem(SPOTIFY_CODE_VERIFY);
+
+  // const params = new URLSearchParams();
+  const btoai = btoa(`${client_id}:${SPOTIFY_CLIENT_SECRET}`);
+  const params = {
+    grant_type: "authorization_code",
+    code,
+    code_verifier: verifier,
+    redirect_uri: "http://localhost:6622/callback",
+  };
 
   const res = await request("/accounts").post("/api/token", params, {
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: "Basic " + btoai,
+    },
   });
   return res.data.access_token;
 };

@@ -1,3 +1,4 @@
+import { SPOTIFY_CODE_VERIFY } from "../../constants/spotify.constants";
 import { generateCodeChallenge } from "../../utils/PKCE";
 
 export const redirectToAuthCodeFlow = async (
@@ -7,10 +8,7 @@ export const redirectToAuthCodeFlow = async (
   const challenge = await generateCodeChallenge(verifier);
   console.log({ challenge });
 
-  localStorage.setItem("code_verifier", verifier);
-
-  //   const clientId = 'YOUR_CLIENT_ID';
-  // const redirectUri = 'http://localhost:8080';
+  localStorage.setItem(SPOTIFY_CODE_VERIFY, verifier);
 
   const scope = "user-read-private user-read-email";
   const authUrl = new URL("https://accounts.spotify.com/authorize");
