@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { AlbumCard, type Album } from "../components/AlbumCard";
 import { redirectToAuthCodeFlow } from "../api/spotify/redirectToAuthCodeFlow";
 import { getAccessToken } from "../api/spotify/getAccessToken";
-import { SPOTIFY_CLIENT_ID } from "../constants/spotify.constants";
+import {
+  SPOTIFY_ACCESS_TOKEN,
+  SPOTIFY_CLIENT_ID,
+} from "../constants/spotify.constants";
 import { getPlayListItemsAlbum } from "../api/spotify/getPlaylist";
 import { generateCodeVerifier } from "../utils/PKCE";
+import { useParams } from "react-router-dom";
 
 const songs: Album[] = [
   {
@@ -19,12 +23,20 @@ const songs: Album[] = [
 
 const Home = () => {
   const [playListId, setPlayListId] = useState<string>();
-  const [code, setCode] = useState<string | null>();
+  // const [code, setCode] = useState<string | null>();
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get("code");
 
   const verifier = generateCodeVerifier();
   // const co_ver = localStorage.getItem("code_verifier");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log({ code });
+    const accessToken = localStorage.getItem(SPOTIFY_ACCESS_TOKEN);
+    if (accessToken || !code) return;
+    fetchAccessToken(code);
+  }, [code]);
+
   function computedAngle(idx: number): number {
     const len = songs.length;
 
@@ -51,19 +63,17 @@ const Home = () => {
 
     return currAngle;
   }
+  async function fetchAccessToken(code: string) {
+    const token = await getAccessToken(SPOTIFY_CLIENT_ID, code);
+    console.log({ token });
+    localStorage.setItem(SPOTIFY_ACCESS_TOKEN, token);
+  }
 
-  async function redirec() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const co = urlParams.get("code");
-    if (co) return;
-    console.log({ co });
+  async function redirect() {
+    if (code) return;
+    console.log({ code });
 
     redirectToAuthCodeFlow(SPOTIFY_CLIENT_ID, verifier);
-
-    // if (!playListId || !co) return;
-    // const token = await getAccessToken(SPOTIFY_CLIENT_ID, co);
-    // const res = await getPlayListItemsAlbum(playListId);
-    // console.log({ res });
   }
 
   return (
@@ -76,8 +86,8 @@ const Home = () => {
               setPlayListId(event.target.value);
             }}
           />
-          <button onClick={() => redirec()}>get code</button>
-          <button>get accessToken</button>
+          <button onClick={() => redirect()}>get code</button>
+          {/* <button onClick={() => getToken()}>get accessToken</button> */}
           <button>get playList</button>
         </header>
         {/* <div className="relative flex-1 flex flex-center">
