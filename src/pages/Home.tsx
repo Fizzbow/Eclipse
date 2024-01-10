@@ -8,7 +8,6 @@ import {
 } from "../constants/spotify.constants";
 import { getPlayListItemsAlbum } from "../api/spotify/getPlaylist";
 import { generateCodeVerifier } from "../utils/PKCE";
-import { useParams } from "react-router-dom";
 
 const songs: Album[] = [
   {
@@ -23,16 +22,13 @@ const songs: Album[] = [
 
 const Home = () => {
   const [playListId, setPlayListId] = useState<string>();
-  // const [code, setCode] = useState<string | null>();
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get("code");
+  const accessToken = localStorage.getItem(SPOTIFY_ACCESS_TOKEN);
 
   const verifier = generateCodeVerifier();
-  // const co_ver = localStorage.getItem("code_verifier");
 
   useEffect(() => {
-    console.log({ code });
-    const accessToken = localStorage.getItem(SPOTIFY_ACCESS_TOKEN);
     if (accessToken || !code) return;
     fetchAccessToken(code);
   }, [code]);
@@ -65,7 +61,7 @@ const Home = () => {
   }
   async function fetchAccessToken(code: string) {
     const token = await getAccessToken(SPOTIFY_CLIENT_ID, code);
-    console.log({ token });
+
     localStorage.setItem(SPOTIFY_ACCESS_TOKEN, token);
   }
 
@@ -74,6 +70,12 @@ const Home = () => {
     console.log({ code });
 
     redirectToAuthCodeFlow(SPOTIFY_CLIENT_ID, verifier);
+  }
+
+  async function requestPlayList() {
+    if (!playListId || !accessToken) return;
+    const playList = await getPlayListItemsAlbum(playListId, accessToken);
+    console.log({ playList });
   }
 
   return (
@@ -88,7 +90,7 @@ const Home = () => {
           />
           <button onClick={() => redirect()}>get code</button>
           {/* <button onClick={() => getToken()}>get accessToken</button> */}
-          <button>get playList</button>
+          <button onClick={() => requestPlayList()}>get playList</button>
         </header>
         {/* <div className="relative flex-1 flex flex-center">
           {songs.map((s, idx) => {

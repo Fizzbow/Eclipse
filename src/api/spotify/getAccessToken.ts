@@ -7,7 +7,6 @@ import {
 export const getAccessToken = async (client_id: string, code: string) => {
   const verifier = localStorage.getItem(SPOTIFY_CODE_VERIFY);
 
-  // const params = new URLSearchParams();
   const btoai = btoa(`${client_id}:${SPOTIFY_CLIENT_SECRET}`);
   const params = {
     grant_type: "authorization_code",
