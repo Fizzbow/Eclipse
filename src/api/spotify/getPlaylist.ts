@@ -24,7 +24,7 @@ export const getPlayListItems = async (
   fields: string,
   access_token: string
 ) => {
-  const res = await request("/api").get(`v1/playlists/${playList_id}/tracks`, {
+  const res = await request("/api").get(`v1/playlists/${playList_id}`, {
     params: { fields },
     headers: { Authorization: `Bearer ${access_token}` },
   });
