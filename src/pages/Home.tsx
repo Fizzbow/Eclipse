@@ -9,6 +9,7 @@ import {
 } from "../constants/spotify.constants";
 import { getPlayListItemsAlbum } from "../api/spotify/getPlaylist";
 import { AuthorizationInfo } from "../types/user.type";
+import Header from "../components/Header";
 
 // const songs: Album[] = [
 //   {
@@ -54,6 +55,7 @@ const Home = () => {
 
   return (
     <main className="full flex flex-col">
+      <Header />
       <header flex="~ row gap-5">
         get playlist :
         <input onChange={(event) => setPlayListId(event.target.value)} />
