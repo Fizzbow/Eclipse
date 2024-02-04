@@ -50,12 +50,15 @@ const getAccessToken = async (client_id: string, isRefreshToken = false) => {
 
   let authInfo: AuthorizationInfo | null = null;
 
-  const res = await request("/accounts").post("/api/token", body, {
-    headers,
-  });
-  authInfo = res.data;
-
-  // TODO:验证失败时刷新token的操作
+  try {
+    const res = await request("/accounts").post("/api/token", body, {
+      headers,
+    });
+    authInfo = res.data;
+  } catch (err) {
+    // TODO:验证失败时刷新token的操作
+    // if(err.response ===401 || err.response===403) getAccessToken()
+  }
 
   if (authInfo) localStorage.setItem(SPOTIFY_TOKEN, JSON.stringify(authInfo));
 };
