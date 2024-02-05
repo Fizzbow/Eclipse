@@ -14,12 +14,6 @@ interface Track {
 }
 
 interface PlayList {
-  // tracks: {
-  //   items: {
-  //     track: Track;
-  //   }[];
-  // };
-
   tracks: Record<"item", { track: Track }>[];
   name: string;
   description: string;

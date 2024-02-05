@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { AlbumCard, type Album } from "../../components/AlbumCard";
 
-import getAccessToken from "../../api/spotify/getAccessToken";
+import getAccessToken from "../../api/spotify/account/getAccessToken";
 import {
   SPOTIFY_TOKEN,
   SPOTIFY_CLIENT_ID,
   SPOTIFY_CODE,
 } from "../../constants/spotify.constants";
 import { getPlayListItemsAlbum } from "../../api/spotify/getPlaylist";
-import { AuthorizationInfo } from "../../types/user.type";
+import { AuthorizationInfo } from "../../types/account.type";
 import Header from "../../components/Header";
 
 // const songs: Album[] = [
