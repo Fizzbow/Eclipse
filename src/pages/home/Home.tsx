@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { AlbumCard, type Album } from "../components/AlbumCard";
+import { AlbumCard, type Album } from "../../components/AlbumCard";
 
-import getAccessToken from "../api/spotify/getAccessToken";
+import getAccessToken from "../../api/spotify/getAccessToken";
 import {
   SPOTIFY_TOKEN,
   SPOTIFY_CLIENT_ID,
   SPOTIFY_CODE,
-} from "../constants/spotify.constants";
-import { getPlayListItemsAlbum } from "../api/spotify/getPlaylist";
-import { AuthorizationInfo } from "../types/user.type";
-import Header from "../components/Header";
+} from "../../constants/spotify.constants";
+import { getPlayListItemsAlbum } from "../../api/spotify/getPlaylist";
+import { AuthorizationInfo } from "../../types/user.type";
+import Header from "../../components/Header";
 
 // const songs: Album[] = [
 //   {
@@ -54,7 +54,7 @@ const Home = () => {
   }
 
   return (
-    <main className="full flex flex-col">
+    <main className="full flex flex-col p-4">
       <Header />
       <header flex="~ row gap-5">
         get playlist :
