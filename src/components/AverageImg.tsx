@@ -42,7 +42,7 @@ const AverageImg = ({ url, setPrimaryColor }: Prop) => {
       const avgG = Math.round(totalG / totalPixels);
       const avgB = Math.round(totalB / totalPixels);
 
-      setPrimaryColor(`rgb(${avgR}, ${avgG}, ${avgB})`);
+      setPrimaryColor(`${avgR}, ${avgG}, ${avgB}`);
 
       console.log(`Average color: RGB(${avgR}, ${avgG}, ${avgB})`);
     };
@@ -53,7 +53,7 @@ const AverageImg = ({ url, setPrimaryColor }: Prop) => {
       <img
         alt="Image"
         ref={imageRef}
-        className="image reactive z-1 w-30 h-30 object-contain rounded-2"
+        className="image reactive z-1 w-30 h-30 object-contain rounded-3"
         src={url}
       />
       <canvas ref={canvasRef} style={{ display: "none" }} />
