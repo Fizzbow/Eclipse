@@ -6,6 +6,7 @@ import {
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
+  presetIcons,
 } from "unocss";
 
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
     presetAttributify(),
     presetTypography(),
     presetWebFonts({}),
+    presetIcons(),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
@@ -31,7 +33,9 @@ export default defineConfig({
       xl: "1280px",
     },
     colors: {
-      greyer: "#76797D",
+      primary: "rgba(var(--primary),%alpha)",
+      secondary: "rgba(var(--secondary),%alpha)",
+      pinky: "rgba(var(--pinky),%alpha)",
     },
   },
 });

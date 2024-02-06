@@ -4,8 +4,8 @@ import Dialog from "./Dialog";
 import styled from "styled-components";
 import "./Album.scss";
 
-const Bg = styled.figure`
-  animation: linearZoom 1.5s infinite alternate;
+const Bg = styled.span`
+  transform: translate(-15%, 0);
 `;
 
 interface Album {
@@ -17,13 +17,18 @@ interface Album {
   angle?: number;
 }
 
-const AlbumCard = ({ singer, angle, album, song, albumImg, mode }: Album) => {
+const AlbumCard = ({ singer, album, song, albumImg, mode }: Album) => {
   const [primary, setPrimary] = useState<string>();
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const figure = document.querySelector("figure") as HTMLElement;
-    figure.style.background = `linear-gradient(45deg ,${primary} 30%,rgb(255,255,255))`;
+    const figure = document.querySelector(".figure") as HTMLElement;
+
+    figure.style.background = `radial-gradient(circle,rgba(${primary},1) 0%,
+    rgba(${primary},0.7) 40%,
+    rgba(${primary},0.5) 60%,
+    rgba(${primary},0.2) 90%,
+    rgba(${primary},0) 100%)`;
   }, [primary]);
 
   useEffect(() => {
@@ -47,44 +52,38 @@ const AlbumCard = ({ singer, angle, album, song, albumImg, mode }: Album) => {
     <>
       <div
         onClick={() => handleAlbum()}
-        className={`AlbumCard m-6  absolute transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-3`}
+        className="AlbumCard m-6 border-2 border-solid 
+        border-gray-300
+        absolute transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-4"
         style={{
           boxShadow:
             "rgba(24, 32, 79, 0.25) 0px 40px 80px, rgba(255, 255, 255, 0.5) 0px 0px 0px 0.5px inset",
-          transform: `rotate(${angle}deg)`,
           transformOrigin: "left bottom",
         }}
       >
-        <AverageImg
-          setPrimaryColor={(primary) => setPrimary(primary)}
-          url={albumImg}
-        />
-
-        <Bg className="w-[120%] h-[120%] transition-width transition-hight filter-blur-[60px] absolute left-[30%]  z-[-1]  rounded-[50%] transition-transform"></Bg>
+        <Bg className="figure w-[130%] h-[150%] filter-blur-2xl  transition-width transition-hight  absolute z-[-1]  rounded-[70%] transition-transform"></Bg>
         <div
           className="mask ml-4 my-4 h-26 justify-between  flex-1 transition-transform "
           flex="~ col"
         >
-          <div
-            style={{ color: `${primary}`, opacity: 0.45 }}
-            className="fonte font-900 tracking-widest text-[18px] text-shadow-sm"
+          <span
+            className="tracking-widest font-500 text-white text-5 text-shadow-sm"
             flex="~ row"
           >
             {song}
-          </div>
-          <div
-            flex="~ row"
-            className="fonte text-white text-[18px] text-shadow-md w-full "
-          >
+          </span>
+          <div flex="~ row" className="fonte text-gray-300 text-sm   w-full">
             {singer}
           </div>
-          <div
-            className="fonte text-white text-[12px] tridimensional-gradient-text"
-            flex="~ row row-reverse"
-          >
+          <div className="fonte text-gray-300 text-sm  " flex="~ row ">
             {album}
           </div>
         </div>
+
+        <AverageImg
+          setPrimaryColor={(primary) => setPrimary(primary)}
+          url={albumImg}
+        />
       </div>
       <Dialog open={open} setOpen={(open) => setOpen(open)} />
     </>
