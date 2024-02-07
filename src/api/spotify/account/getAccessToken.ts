@@ -45,18 +45,22 @@ const getAccessToken = async (client_id: string, isRefreshToken = false) => {
     Authorization: "Basic " + btoaI,
   };
 
-  console.log({ headers });
   try {
     const res = await request("/accounts").post("/api/token", body, {
       headers,
     });
     authInfo = res.data;
+    if (authInfo) {
+      localStorage.setItem(SPOTIFY_TOKEN, JSON.stringify(authInfo));
+      return true;
+    } else {
+      return false;
+    }
   } catch (err) {
     // TODO:验证失败时刷新token的操作
     // if(err.response ===401 || err.response===403) getAccessToken()
+    return false;
   }
-
-  if (authInfo) localStorage.setItem(SPOTIFY_TOKEN, JSON.stringify(authInfo));
 };
 
 export default getAccessToken;
