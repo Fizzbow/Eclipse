@@ -21,7 +21,29 @@ export default defineConfig({
     presetUno(),
     presetAttributify(),
     presetTypography(),
-    presetWebFonts({}),
+    presetWebFonts({
+      provider: "fontshare",
+      fonts: {
+        sw: [
+          { name: "Switzer", weights: ["400", "700"], italic: false },
+          {
+            name: "sans-serif",
+            provider: "none",
+          },
+        ],
+        plan: [
+          {
+            name: "Plus Jakarta Sans",
+            weights: ["200", "300", "400", "500", "700"],
+            italic: false,
+          },
+          {
+            name: "sans-serif",
+            provider: "none",
+          },
+        ],
+      },
+    }),
     presetIcons(),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],

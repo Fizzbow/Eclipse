@@ -13,7 +13,7 @@ const request = (baseURL: Base): AxiosInstance => {
 
   instance.interceptors.request.use(
     (config) => {
-      if (!userInfo) return config;
+      if (!userInfo || config.url === "/api/token") return config;
 
       const userObj = JSON.parse(userInfo) as AuthorizationInfo;
       if (userObj.access_token && userObj.token_type) {

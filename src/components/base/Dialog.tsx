@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./Dialog.scss";
-import Lyric from "../pages/Lyric.tsx";
+import Lyric from "@/pages/Lyric.tsx";
 
 interface Prop {
   open: boolean;
@@ -17,6 +17,7 @@ const Dialog = ({ setOpen, open }: Prop) => {
       dialog.classList.remove("in");
     }
   }, [open]);
+
   return (
     <div
       className="dialog absolute transition-all z-[9999] full scale-0"
