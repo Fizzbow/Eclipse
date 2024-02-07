@@ -1,15 +1,13 @@
-import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import SpotifyIcon from "@/components/icon/SpotifyIcon";
-import { useEffect, useState } from "react";
-
-import { getProfile } from "@/api/spotify/users/getProfile";
+import { useState } from "react";
+import Home from "./Home";
 
 const Layout = () => {
   return (
     <main className="full flex flex-col">
       <Header />
-      <Outlet />
+      <Home />
     </main>
   );
 };
@@ -17,23 +15,11 @@ const Layout = () => {
 const Header = () => {
   const [isSpOpen, setIsSpOpen] = useState(false);
 
-  const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  const fetchProfile = async () => {
-    const res = await getProfile();
-
-    setImageUrl(res.images[0].url);
-    console.log(res.images[0]);
-  };
   return (
     <motion.header
       initial={false}
       animate={isSpOpen ? "open" : "closed"}
-      className="py-3 sticky bg-gray-100 rounded-2 items-center  flex px-5 mx-5 flex-row justify-between"
+      className="py-3 sticky bg-gray-100 rounded-2 items-center flex px-5 mx-5 flex-row justify-between"
     >
       <div />
       <span className="font-800  text-5 text-slate-600">ECLIPSE</span>
@@ -76,15 +62,6 @@ const Header = () => {
         <span className="text-primary/90 font-600">connect with Spotify</span>
       </motion.button>
     </motion.header>
-  );
-};
-
-const Ava = ({ url }: { url: string }) => {
-  return (
-    <div
-      className="w-10 h-10 bg-contain rounded-[50%]"
-      style={{ backgroundImage: `url(${url})` }}
-    ></div>
   );
 };
 

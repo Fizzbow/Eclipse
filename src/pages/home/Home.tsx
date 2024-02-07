@@ -23,11 +23,6 @@ const Home = () => {
     localStorage.setItem(SPOTIFY_CODE, code);
   }, [code]);
 
-  // async function redirect() {
-  //   if (code) return;
-  //   redirectToAuthCodeFlow(SPOTIFY_CLIENT_ID, verifier);
-  // }
-
   return (
     <main className="full flex flex-col">
       <div
