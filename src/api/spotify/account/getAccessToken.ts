@@ -9,9 +9,10 @@ import { AuthorizationInfo, CurrTokenRequest, Grant } from "@/types";
 import { redirectToAuthCodeFlow } from "../redirectToAuthCodeFlow";
 import { generateCodeVerifier } from "@/utils/PKCE";
 
+const userInfo = localStorage.getItem(SPOTIFY_TOKEN);
+
 const getAccessToken = async (client_id: string, isRefreshToken = false) => {
   const code = localStorage.getItem(SPOTIFY_CODE) as string;
-  const userInfo = localStorage.getItem(SPOTIFY_TOKEN);
 
   let body: CurrTokenRequest<typeof isRefreshToken>;
 
@@ -50,6 +51,7 @@ const getAccessToken = async (client_id: string, isRefreshToken = false) => {
       headers,
     });
     authInfo = res.data;
+
     if (authInfo) {
       localStorage.setItem(SPOTIFY_TOKEN, JSON.stringify(authInfo));
       return true;

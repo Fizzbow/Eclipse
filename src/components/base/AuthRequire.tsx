@@ -21,6 +21,7 @@ const AuthRequire = ({ children, redirectTo }: RequireProps) => {
     } else {
       info = await getAccessToken(SPOTIFY_CLIENT_ID, true);
     }
+
     setIsLoading(false);
     setIsAccess(info);
   };

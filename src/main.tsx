@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import "virtual:uno.css";
@@ -12,8 +11,8 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AuthRequire redirectTo={<LoginLayout />}>
-        <Layout />
+      <AuthRequire redirectTo={<Layout />}>
+        <LoginLayout />
       </AuthRequire>
     ),
     children: [],
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RouterProvider router={router} />
+  // </React.StrictMode>
 );
