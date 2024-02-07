@@ -6,7 +6,10 @@ const Content = styled.div`
 
 const Lyric = () => {
   return (
-    <Content className="lyric font-bold text-white text-[30px]" flex="~ col">
+    <Content
+      className="lyric font-plan font-bold text-white text-[30px]"
+      flex="~ col"
+    >
       <span>흐릿하게 드리운</span>
       <span>안갯속 All alone</span>
       <span>널 가로막은 경계선</span>

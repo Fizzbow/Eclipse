@@ -12,7 +12,7 @@
 .dialog {
   &.in {
     transform: scale(1);
-    @include bgColorOp(0);
+    @include bgColorOp(1);
     @include animationEffect(blowUpBlur, 4s);
     .dialog-content {
       opacity: 1;

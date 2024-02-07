@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AverageImg from "./AverageImg";
-import Dialog from "./Dialog";
+import Dialog from "./base/Dialog";
 import styled from "styled-components";
 import "./Album.scss";
 
@@ -52,13 +52,14 @@ const AlbumCard = ({ singer, album, song, albumImg, mode }: Album) => {
     <>
       <div
         onClick={() => handleAlbum()}
-        className="AlbumCard m-6 border-2 border-solid 
+        className="AlbumCard font-sw m-6 border-2 border-solid 
         border-gray-300
         absolute transition-all overflow-hidden  z-1 w-100 h-40 cursor-pointer  flex flex-row items-center   px-5 shadow-md rounded-4"
         style={{
           boxShadow:
             "rgba(24, 32, 79, 0.25) 0px 40px 80px, rgba(255, 255, 255, 0.5) 0px 0px 0px 0.5px inset",
           transformOrigin: "left bottom",
+          transform: "translateZ(50px)",
         }}
       >
         <Bg className="figure w-[130%] h-[150%] filter-blur-2xl  transition-width transition-hight  absolute z-[-1]  rounded-[70%] transition-transform"></Bg>
@@ -67,7 +68,7 @@ const AlbumCard = ({ singer, album, song, albumImg, mode }: Album) => {
           flex="~ col"
         >
           <span
-            className="tracking-widest font-500 text-white text-5 text-shadow-sm"
+            className="tracking-widest font-sw font-500 text-white text-5 text-shadow-sm"
             flex="~ row"
           >
             {song}
@@ -85,6 +86,7 @@ const AlbumCard = ({ singer, album, song, albumImg, mode }: Album) => {
           url={albumImg}
         />
       </div>
+
       <Dialog open={open} setOpen={(open) => setOpen(open)} />
     </>
   );

@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital@0;1&display=swap");
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif,
-    Atkinson Hyperlegible;
   line-height: 1.5;
   font-weight: 400;
 
@@ -30,19 +27,12 @@ body {
   height: 100vh;
   margin: 0px;
   background: #fff;
-  /* background: rgb(41, 41, 101);
-  background: linear-gradient(
-    175deg,
-    rgba(41, 41, 101, 1) 0%,
-    rgba(93, 63, 124, 1) 37%,
-    rgba(189, 79, 154, 1) 100%
-  ); */
 }
 
 #root {
   text-align: center;
   height: 100%;
-  overflow: hidden;
+
   display: flex;
   justify-content: center;
   align-items: center;
