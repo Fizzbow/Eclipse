@@ -15,11 +15,6 @@ const getAccessToken = async (client_id: string, isRefreshToken = false) => {
 
   let body: CurrTokenRequest<typeof isRefreshToken>;
 
-  const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: "",
-  };
-  let btoaI;
   if (userInfo && isRefreshToken) {
     const userObj = JSON.parse(userInfo) as AuthorizationInfo;
     body = {
@@ -34,18 +29,23 @@ const getAccessToken = async (client_id: string, isRefreshToken = false) => {
     }
     const verifier = localStorage.getItem(SPOTIFY_CODE_VERIFY);
 
-    btoaI = btoa(`${client_id}:${SPOTIFY_CLIENT_SECRET}`);
     body = {
       grant_type: Grant.AUTHORIZATION,
       code,
       code_verifier: verifier as string,
       redirect_uri: import.meta.env.VITE_REDIRECT_URL,
     };
-    headers.Authorization = "Basic " + btoaI;
   }
 
   let authInfo: AuthorizationInfo | null = null;
 
+  const btoaI = btoa(`${client_id}:${SPOTIFY_CLIENT_SECRET}`);
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: "Basic " + btoaI,
+  };
+
+  console.log({ headers });
   try {
     const res = await request("/accounts").post("/api/token", body, {
       headers,
