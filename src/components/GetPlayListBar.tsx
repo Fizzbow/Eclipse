@@ -1,6 +1,7 @@
 import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "@/hooks/useDimensions";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { Profile } from "@/types";
 
 const sidebar = {
   open: (height = 1000) => ({
@@ -22,10 +23,18 @@ const sidebar = {
   },
 };
 
-const GetPlayListBar = () => {
+const GetPlayListBar = ({ profile }: { profile: Profile }) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
+
+  useEffect(() => {
+    if (isOpen) {
+      fetchGetPlayList();
+    }
+  }, [isOpen]);
+
+  const fetchGetPlayList = () => {};
   return (
     <motion.nav
       className="relative flex-1"
@@ -35,7 +44,7 @@ const GetPlayListBar = () => {
       animate={isOpen ? "open" : "closed"}
     >
       <motion.div
-        className="bg-red -translate-x-[50%] h-[100%] absolute left-[50%] bottom-0 w-[100%]"
+        className="bg-gray-300 -translate-x-[50%] h-[100%] absolute left-[50%] bottom-0 w-[100%]"
         variants={sidebar}
       ></motion.div>
 
@@ -52,5 +61,7 @@ const GetPlayListBar = () => {
 };
 
 const PlayList = () => {};
+
+const Item = () => {};
 
 export default GetPlayListBar;

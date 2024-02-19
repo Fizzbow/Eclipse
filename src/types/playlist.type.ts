@@ -13,10 +13,31 @@ interface Track {
   name: string;
 }
 
-interface PlayList {
+interface SinglePlayListItems {
   tracks: Record<"item", { track: Track }>[];
   name: string;
   description: string;
 }
 
-export type { Image, Alb, Track, PlayList };
+interface UserPlaylistObject {
+  images: Image[];
+  description: string;
+  /** the Spotify ID for the playlist */
+  id: string;
+  name: string;
+}
+
+interface UserPlayLists {
+  limit: number;
+  total: number;
+  offset: number;
+  /** next URL to the next page of items. ( null if none)
+   * Example: "https://api.spotify.com/v1/me/shows?offset=1&limit=1"  */
+  next: string;
+  /** URL to the previous page of items. ( null if none)
+   * Example: "https://api.spotify.com/v1/me/shows?offset=1&limit=1" */
+  previous: string;
+  items: UserPlaylistObject[];
+}
+
+export type { Image, Alb, Track, SinglePlayListItems, UserPlayLists };
