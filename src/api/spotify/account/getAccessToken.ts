@@ -6,16 +6,13 @@ import {
   SPOTIFY_CODE,
 } from "@/constants/spotify.constants";
 import { AuthorizationInfo, CurrTokenRequest, Grant } from "@/types";
-import { redirectToAuthCodeFlow } from "../redirectToAuthCodeFlow";
-import { generateCodeVerifier } from "@/utils/PKCE";
 
 const userInfo = localStorage.getItem(SPOTIFY_TOKEN);
 
 const isAccessToken = async (client_id: string, isRefreshToken = false) => {
-  const code = localStorage.getItem(SPOTIFY_CODE) as string;
-
   let body: CurrTokenRequest<typeof isRefreshToken>;
 
+  // refresh
   if (userInfo && isRefreshToken) {
     const userObj = JSON.parse(userInfo) as AuthorizationInfo;
     body = {
@@ -23,13 +20,16 @@ const isAccessToken = async (client_id: string, isRefreshToken = false) => {
       refresh_token: userObj.refresh_token,
       client_id,
     };
-  } else {
-    if (!code) {
-      const initVerifier = generateCodeVerifier();
-      redirectToAuthCodeFlow(client_id, initVerifier);
-    }
-    const verifier = localStorage.getItem(SPOTIFY_CODE_VERIFY);
 
+    // init
+  } else {
+    // if (!code) {
+    //   const initVerifier = generateCodeVerifier();
+    //   redirectToAuthCodeFlow(client_id, initVerifier);
+    // }
+
+    const verifier = localStorage.getItem(SPOTIFY_CODE_VERIFY);
+    const code = localStorage.getItem(SPOTIFY_CODE) as string;
     body = {
       grant_type: Grant.AUTHORIZATION,
       code,
