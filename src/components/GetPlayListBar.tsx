@@ -2,6 +2,7 @@ import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "@/hooks/useDimensions";
 import { useEffect, useRef } from "react";
 import { Profile } from "@/types";
+import { getUserAllPlayList } from "@/api/spotify/me/getUserAllPlayList";
 
 const playListBar = {
   open: (height = 1000) => ({
@@ -63,7 +64,10 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
     }
   }, [isOpen]);
 
-  const fetchGetPlayList = () => {};
+  const fetchGetPlayList = async () => {
+    const res = await getUserAllPlayList();
+    console.log({ res });
+  };
   return (
     <motion.nav
       className="relative flex-1"

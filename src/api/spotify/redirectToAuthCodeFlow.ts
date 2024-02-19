@@ -9,7 +9,8 @@ export const redirectToAuthCodeFlow = async (
 
   localStorage.setItem(SPOTIFY_CODE_VERIFY, verifier);
 
-  const scope = "user-read-private user-read-email";
+  const scope =
+    "user-read-private user-read-email playlist-read-collaborative playlist-read-private";
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
   const params = {

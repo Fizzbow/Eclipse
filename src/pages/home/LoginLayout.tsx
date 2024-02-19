@@ -1,4 +1,4 @@
-import { getProfile } from "@/api/spotify/users/getProfile";
+import { getProfile } from "@/api/spotify/me/getProfile";
 import GetPlayListBar from "@/components/GetPlayListBar";
 import { Profile } from "@/types";
 import { useEffect, useState } from "react";
