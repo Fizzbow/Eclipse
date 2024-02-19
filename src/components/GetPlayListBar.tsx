@@ -3,7 +3,7 @@ import { useDimensions } from "@/hooks/useDimensions";
 import { useEffect, useRef } from "react";
 import { Profile } from "@/types";
 
-const sidebar = {
+const playListBar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px)`,
     transition: {
@@ -19,6 +19,35 @@ const sidebar = {
       type: "spring",
       stiffness: 400,
       damping: 40,
+    },
+  },
+};
+
+const playItem = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+    },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
+    },
+  },
+};
+
+const playListText = {
+  open: {
+    opacity: 0,
+  },
+  closed: {
+    opacity: 1,
+    transition: {
+      delay: 0.7,
     },
   },
 };
@@ -43,25 +72,29 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
       custom={height}
       animate={isOpen ? "open" : "closed"}
     >
-      <motion.div
-        className="bg-gray-300 -translate-x-[50%] h-[100%] absolute left-[50%] bottom-0 w-[100%]"
-        variants={sidebar}
-      ></motion.div>
+      <motion.ul
+        className="bg-gray-300 flex-center -translate-x-[50%] h-[100%] absolute left-[50%] bottom-0 w-[100%]"
+        variants={playListBar}
+      >
+        <motion.li
+          className="w-30 h-10 rounded-2 flex-center border-blue border-2 border-solid"
+          variants={playItem}
+        >
+          Items Items
+        </motion.li>
+      </motion.ul>
 
       <motion.div
-        className="cursor-pointer flex-center  absolute rounded-[50%] w-[200px] h-[200px] z-10 top-[50%] left-[50%]  -translate-y-[50%] -translate-x-[50%] "
+        variants={playListText}
+        className="cursor-pointer flex-center
+        font-800 text-white text-shadow-sm text-6 
+        absolute rounded-[50%] w-[200px] h-[200px] z-10 top-[50%] left-[50%]  -translate-y-[50%] -translate-x-[50%] "
         onClick={() => toggleOpen()}
       >
-        <span className="font-800 text-white text-shadow-sm text-6">
-          Get Your Spotify PlayLists
-        </span>
+        Get Your Spotify PlayLists
       </motion.div>
     </motion.nav>
   );
 };
-
-const PlayList = () => {};
-
-const Item = () => {};
 
 export default GetPlayListBar;
