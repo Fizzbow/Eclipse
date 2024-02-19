@@ -1,4 +1,4 @@
-import getAccessToken from "@/api/spotify/account/getAccessToken";
+import isAccessToken from "@/api/spotify/account/getAccessToken";
 import { SPOTIFY_CLIENT_ID, SPOTIFY_TOKEN } from "@/constants";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
@@ -15,15 +15,14 @@ const AuthRequire = ({ children, redirectTo }: RequireProps) => {
 
   const fetchIsAccess = async () => {
     setIsLoading(true);
-    let info;
-    if (!tokenInfo) {
-      info = await getAccessToken(SPOTIFY_CLIENT_ID);
-    } else {
-      info = await getAccessToken(SPOTIFY_CLIENT_ID, true);
-    }
 
+    if (tokenInfo) {
+      const info = await isAccessToken(SPOTIFY_CLIENT_ID);
+      setIsAccess(info);
+    } else {
+      setIsAccess(false);
+    }
     setIsLoading(false);
-    setIsAccess(info);
   };
   useEffect(() => {
     fetchIsAccess();

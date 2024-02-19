@@ -11,7 +11,7 @@ import { generateCodeVerifier } from "@/utils/PKCE";
 
 const userInfo = localStorage.getItem(SPOTIFY_TOKEN);
 
-const getAccessToken = async (client_id: string, isRefreshToken = false) => {
+const isAccessToken = async (client_id: string, isRefreshToken = false) => {
   const code = localStorage.getItem(SPOTIFY_CODE) as string;
 
   let body: CurrTokenRequest<typeof isRefreshToken>;
@@ -65,4 +65,4 @@ const getAccessToken = async (client_id: string, isRefreshToken = false) => {
   }
 };
 
-export default getAccessToken;
+export default isAccessToken;
