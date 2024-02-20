@@ -13,6 +13,10 @@ interface Track {
   name: string;
 }
 
+interface Owner {
+  display_name: string;
+}
+
 interface SinglePlayListItems {
   tracks: Record<"item", { track: Track }>[];
   name: string;
@@ -25,6 +29,7 @@ interface UserPlaylistObject {
   /** the Spotify ID for the playlist */
   id: string;
   name: string;
+  owner: Owner;
 }
 
 interface UserPlayLists {
@@ -40,4 +45,11 @@ interface UserPlayLists {
   items: UserPlaylistObject[];
 }
 
-export type { Image, Alb, Track, SinglePlayListItems, UserPlayLists };
+export type {
+  Image,
+  Alb,
+  Track,
+  SinglePlayListItems,
+  UserPlaylistObject,
+  UserPlayLists,
+};
