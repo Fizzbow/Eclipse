@@ -3,6 +3,10 @@ import SpotifyIcon from "@/components/icon/SpotifyIcon";
 import { useState } from "react";
 import Home from "./Home";
 
+import { SPOTIFY_CLIENT_ID } from "@/constants";
+import { generateCodeVerifier } from "@/utils/PKCE";
+import { redirectToAuthCodeFlow } from "@/api/spotify/redirectToAuthCodeFlow";
+
 const Layout = () => {
   return (
     <main className="full flex flex-col">
@@ -14,6 +18,11 @@ const Layout = () => {
 
 const Header = () => {
   const [isSpOpen, setIsSpOpen] = useState(false);
+
+  const connectSpotify = () => {
+    const initVerifier = generateCodeVerifier();
+    redirectToAuthCodeFlow(SPOTIFY_CLIENT_ID, initVerifier);
+  };
 
   return (
     <motion.header
@@ -33,6 +42,7 @@ const Header = () => {
       </motion.button>
 
       <motion.button
+        onClick={() => connectSpotify()}
         className="
             absolute 
             right-4
