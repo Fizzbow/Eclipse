@@ -8,7 +8,6 @@ interface RequireProps {
   redirectTo: React.ReactElement | string;
 }
 const tokenInfo = localStorage.getItem(SPOTIFY_TOKEN);
-const localCode = localStorage.getItem(SPOTIFY_CODE);
 
 const AuthRequire = ({ children, redirectTo }: RequireProps) => {
   const [isAccess, setIsAccess] = useState(false);
@@ -36,8 +35,7 @@ const AuthRequire = ({ children, redirectTo }: RequireProps) => {
   }, []);
 
   useEffect(() => {
-    if (!location.search || !location.search.includes("code") || localCode)
-      return;
+    if (!location.search || !location.search.includes("code")) return;
 
     const urlParams = new URLSearchParams(location.search);
     const code = urlParams.get("code") as string;
