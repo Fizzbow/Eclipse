@@ -59,21 +59,25 @@ const playListText = {
 
 const GetPlayListBar = ({ profile }: { profile: Profile }) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
+  const [loading, setLoading] = useState(false);
   const containerRef = useRef(null);
   const [playLists, setPlayLists] = useState<UserPlaylistObject[]>([]);
   const { height } = useDimensions(containerRef);
 
-  useEffect(() => {
-    if (isOpen) {
-      fetchGetPlayList();
-    }
-  }, [isOpen]);
-
   const fetchGetPlayList = async () => {
+    if (isOpen) {
+      toggleOpen();
+      return;
+    }
+    setLoading(true);
     const res = await getUserAllPlayList();
+    setLoading(false);
     if (res && res.items.length) {
       setPlayLists([...res.items]);
     }
+    setTimeout(() => {
+      toggleOpen();
+    }, 0);
   };
   return (
     <motion.nav
@@ -116,9 +120,9 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
         className="cursor-pointer flex-center
         font-800 text-white text-shadow-sm text-6 
         absolute rounded-[50%] w-[200px] h-[200px] z-10 top-[50%] left-[50%]  -translate-y-[50%] -translate-x-[50%] "
-        onClick={() => toggleOpen()}
+        onClick={() => fetchGetPlayList()}
       >
-        Get Your Spotify PlayLists
+        {loading ? "loading..." : "Get Your Spotify PlayLists"}
       </motion.div>
     </motion.nav>
   );
