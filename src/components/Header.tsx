@@ -16,11 +16,14 @@ const Header = ({ AvaUrl, connected }: HeaderProps) => {
   return (
     <header
       style={{
-        backgroundImage:
-          "radial-gradient(rgba(0, 0, 0, 0) 1px,var(--background) 1px)",
+        backdropFilter: "blur(40px)",
+        backgroundSize: "15px 15px",
       }}
-      className="flex sticky
+      className="flex fixed
         font-sw
+        z-10
+        w-full
+        bg-transparent
         p-3
         flex-row justify-between
         border-b-1 border-b-dotted border-b-primary/100

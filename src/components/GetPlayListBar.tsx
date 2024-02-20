@@ -1,6 +1,6 @@
 import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "@/hooks/useDimensions";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Profile, UserPlaylistObject } from "@/types";
 import { getUserAllPlayList } from "@/api/spotify/me/getUserAllPlayList";
 
@@ -81,7 +81,7 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
   };
   return (
     <motion.nav
-      className="relative flex-1"
+      className="relative full"
       ref={containerRef}
       initial={false}
       custom={height}
