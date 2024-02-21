@@ -24,29 +24,30 @@ const Header = ({ AvaUrl, connected }: HeaderProps) => {
         z-10
         w-full
         bg-transparent
-        p-3
+        py-3
         flex-row justify-between
         border-b-1 border-b-dotted border-b-primary/100
         "
     >
-      <div />
       <span
         style={{
           WebkitTextFillColor: "transparent",
         }}
         className="font-500 text-7 bg-gradient-to-r
-        bg-clip-text from-primary/65  to-blue-500"
+        bg-clip-text mx-3 from-primary/65  to-blue-500"
       >
         ECLIPSE
       </span>
 
-      {connected ? (
-        <div>{AvaUrl && <Ava url={AvaUrl} />}</div>
-      ) : (
-        <Btn onClick={() => connectSpotify()} outline>
-          connect with spotify
-        </Btn>
-      )}
+      <div className="mx-3">
+        {connected ? (
+          <div>{AvaUrl && <Ava url={AvaUrl} />}</div>
+        ) : (
+          <Btn onClick={() => connectSpotify()} outline>
+            connect with spotify
+          </Btn>
+        )}
+      </div>
     </header>
   );
 };
