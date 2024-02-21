@@ -3,6 +3,7 @@ import { useDimensions } from "@/hooks/useDimensions";
 import { useRef, useState } from "react";
 import { Profile, UserPlaylistObject } from "@/types";
 import { getUserAllPlayList } from "@/api/spotify/me/getUserAllPlayList";
+import OrbitLoading from "./base/OrbitLoading";
 
 const playListBar = {
   open: (height = 1000) => ({
@@ -103,7 +104,7 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
         absolute rounded-[50%] w-[200px] h-[200px] z-10 top-[50%] left-[50%]  -translate-y-[50%] -translate-x-[50%] "
         onClick={() => fetchGetPlayList()}
       >
-        {loading ? "loading..." : "Get Your Spotify PlayLists"}
+        {loading ? <OrbitLoading /> : "Get Your Spotify PlayLists"}
       </motion.div>
     </motion.nav>
   );
