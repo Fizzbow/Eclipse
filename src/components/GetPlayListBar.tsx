@@ -113,16 +113,21 @@ const PlayItem = ({ item }: { item: UserPlaylistObject }) => {
   return (
     <motion.li
       key={item.id}
-      className="min-w-100  px-5 py-3 flex flex-row gap-10 rounded-2 flex-center bg-[rgba(255,255,255,0.2)] border-2 "
+      className="w-100  px-5 py-3 flex flex-row gap-6 rounded-2 flex-center bg-[rgba(255,255,255,0.2)] border-2 "
       variants={playItem}
     >
       <div
         className="w-20 h-20 bg-contain bg-no-repeat rounded-2"
         style={{ backgroundImage: `url(${item.images[0].url})` }}
       />
-      <div className="flex-1 text-gray-100 flex flex-col font-plan gap-2">
-        <span className="text-right">{item.owner.display_name || ""}</span>
-        <span className=" font-600 text-4">{item.name}</span>
+      <div className="flex-1 text-gray-100 flex flex-col font-plan gap-2 overflow-hidden ">
+        <span className=" font-600 text-4  text-left text-nowrap overflow-hidden text-ellipsis text-4">
+          {item.name}
+        </span>
+        <span className="text-right text-nowrap">
+          <span className="text-gray-200">CREATED BY : </span>
+          {item.owner.display_name || ""}
+        </span>
       </div>
     </motion.li>
   );

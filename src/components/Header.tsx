@@ -16,7 +16,6 @@ const Header = ({ AvaUrl, connected }: HeaderProps) => {
   return (
     <header
       style={{
-        backdropFilter: "blur(40px)",
         backgroundSize: "15px 15px",
       }}
       className="flex fixed
@@ -25,6 +24,7 @@ const Header = ({ AvaUrl, connected }: HeaderProps) => {
         w-full
         bg-transparent
         py-3
+        backdrop-blur-2xl
         flex-row justify-between
         border-b-1 border-b-dotted border-b-primary/100
         "
