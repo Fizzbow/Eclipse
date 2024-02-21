@@ -45,19 +45,6 @@
   transform: scale(1);
 }
 
-.orbit > div:nth-child(1)::before {
-  background-color: #3369e8;
-}
-.orbit > div:nth-child(2)::before {
-  background-color: #d50f25;
-}
-.orbit > div:nth-child(3)::before {
-  background-color: #009925;
-}
-.orbit > div:nth-child(4)::before {
-  background-color: #eeb211;
-}
-
 .go .loader.orbit > div {
   animation: loading-orbit 6s infinite linear;
 }

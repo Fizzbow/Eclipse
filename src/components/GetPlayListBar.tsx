@@ -106,6 +106,8 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
       >
         {loading ? <OrbitLoading /> : "Get Your Spotify PlayLists"}
       </motion.div>
+
+      <OrbitLoading />
     </motion.nav>
   );
 };
