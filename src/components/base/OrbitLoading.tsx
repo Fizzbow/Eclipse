@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./OrbitLoading.scss";
 
 const defaultColors = [
@@ -16,19 +15,30 @@ interface OrbitProps {
   size?: string;
 }
 const OrbitLoading = ({ colors = defaultColors }: OrbitProps) => {
-  const beforeStyle = (color: string) => {
-    return { backgroundColor: `${color}` };
+  const spanStyle = (color: string, idx: number) => {
+    const animationDelay = `${-(idx * 0.5)}s`;
+    return { backgroundColor: `${color}`, animationDelay };
   };
 
   return (
     <div className="go">
       <div className="loader orbit">
-        {colors.map((color) => (
+        {colors.map((color, idx) => (
           <div
             key={color}
-            style={beforeStyle(color)}
-            className={`before:(bg-[${color}])`}
-          />
+            style={{
+              animationDelay: `-(${idx * 0.75})s`,
+            }}
+          >
+            <span
+              style={{
+                left: "calc(50% - 0.5em)",
+                animation: "loading-orbit-before 2s infinite ease-in-out",
+                ...spanStyle(color, idx),
+              }}
+              className="absolute block h-1 w-1 rounded-[50%] scale-1"
+            />
+          </div>
         ))}
       </div>
     </div>
