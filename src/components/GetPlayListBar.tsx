@@ -71,7 +71,9 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
       return;
     }
     setLoading(true);
+
     const res = await getUserAllPlayList();
+
     setLoading(false);
     if (res && res.items.length) {
       setPlayLists([...res.items]);
@@ -104,10 +106,8 @@ const GetPlayListBar = ({ profile }: { profile: Profile }) => {
         absolute rounded-[50%] w-[200px] h-[200px] z-10 top-[50%] left-[50%]  -translate-y-[50%] -translate-x-[50%] "
         onClick={() => fetchGetPlayList()}
       >
-        {loading ? <OrbitLoading /> : "Get Your Spotify PlayLists"}
+        {loading ? "loading..." : "Get Your Spotify PlayLists"}
       </motion.div>
-
-      <OrbitLoading />
     </motion.nav>
   );
 };
