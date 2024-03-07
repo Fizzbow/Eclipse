@@ -10,37 +10,36 @@ const defaultColors = [
 ];
 
 interface OrbitProps {
+  /** rem */
+  size?: number;
   colors?: Array<string>;
-  /** px */
-  size?: string;
 }
-const OrbitLoading = ({ colors = defaultColors }: OrbitProps) => {
-  const spanStyle = (color: string, idx: number) => {
-    const animationDelay = `${-(idx * 0.5)}s`;
-    return { backgroundColor: `${color}`, animationDelay };
-  };
-
+const OrbitLoading = ({ colors = defaultColors, size = 7 }: OrbitProps) => {
   return (
-    <div className="go">
-      <div className="loader orbit">
-        {colors.map((color, idx) => (
-          <div
-            key={color}
+    <div
+      className="loader"
+      style={{
+        width: `${size}rem`,
+        height: `${size}rem`,
+      }}
+    >
+      {colors.map((color, idx) => (
+        <div
+          className="loader-orbit skew-y-12"
+          style={{
+            borderColor: `${color}`,
+            animationDelay: `-${1000 * idx}ms`,
+          }}
+        >
+          <span
+            className="loader-orbit_circle block rounded-[50%]"
             style={{
-              animationDelay: `-(${idx * 0.75})s`,
+              backgroundColor: `${color}`,
+              animationDelay: `-${500 * idx}ms`,
             }}
-          >
-            <span
-              style={{
-                left: "calc(50% - 0.5em)",
-                animation: "loading-orbit-before 2s infinite ease-in-out",
-                ...spanStyle(color, idx),
-              }}
-              className="absolute block h-1 w-1 rounded-[50%] scale-1"
-            />
-          </div>
-        ))}
-      </div>
+          />
+        </div>
+      ))}
     </div>
   );
 };

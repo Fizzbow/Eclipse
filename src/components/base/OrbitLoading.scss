@@ -1,64 +1,47 @@
-.orbit {
-  height: 20rem;
-  width: 20rem;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  overflow: visible;
-  background: transparent;
-  border-radius: 50%;
+$orbitSize: 6rem;
+$circleSize: $orbitSize / 12;
+
+@mixin generateSquare($size) {
+  width: $size;
+  height: $size;
 }
 
-.orbit > div {
-  top: 2.5rem;
-  left: 2.5rem;
-  font-size: 1rem;
-  height: 15rem;
-  width: 15rem;
-  transform-origin: center center;
+.loader-orbit {
+  @include generateSquare($orbitSize);
+  animation: orbit-rotation 6s infinite linear;
+  position: absolute;
+
+  &_circle {
+    @include generateSquare($circleSize);
+    animation: circle-loading 2s infinite ease-in-out;
+  }
 }
 
-.go .loader.orbit > div {
-  animation: loading-orbit 6s infinite linear;
-}
-
-@keyframes loading-orbit {
+@keyframes orbit-rotation {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0);
   }
   100% {
     transform: rotate(360deg);
   }
 }
-
-@keyframes loading-orbit-before {
+@keyframes circle-loading {
   0% {
-    height: 1em;
-    width: 1em;
     transform: translate3d(0, 0, 0);
-    z-index: 5;
-  }
-  5% {
-    height: 1.25em;
-    width: 1.25em;
+    @include generateSquare($circleSize);
   }
   25% {
-    height: 2em;
-    width: 2em;
-    z-index: 10;
+    @include generateSquare($circleSize * 1.5);
   }
   50% {
-    transform: translate3d(1rem, 15rem, 0);
-    z-index: 0;
-    height: 1em;
-    width: 1em;
+    transform: translate3d(0.5rem, $orbitSize, 0);
+    @include generateSquare($circleSize);
+  }
+  75% {
+    @include generateSquare($circleSize * 0.5);
   }
   100% {
-    transform: translate3d(0, 0, 0);
-    z-index: 0;
-    height: 1em;
-    width: 1em;
+    transform: translate(0, 0, 0);
+    @include generateSquare($circleSize);
   }
 }
